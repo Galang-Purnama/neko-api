@@ -44,9 +44,16 @@ class NekoAPI {
 	}
 	get fun() {
 		return {
-			dadu: async () => new API(this.baseURL, this.ApiKEY).get("/api/downloader/dadu"),
-			coffee: async () => new API(this.baseURL, this.ApiKEY).get("/api/downloader/coffee"),
-			quotesanime: async () => new API(this.baseURL, this.ApiKEY).get("/api/downloader/quotesanime"),
+			dadu: async () => new API(this.baseURL, this.ApiKEY).get("/api/fun/dadu"),
+			coffee: async () => new API(this.baseURL, this.ApiKEY).get("/api/fun/coffee"),
+			quotesanime: async () => new API(this.baseURL, this.ApiKEY).get("/api/fun/quotesanime"),
+		}
+	}
+	get search() {
+		return {
+			yts: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/yts"),
+			komikcast: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/komikcast"),
+			characterai: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/characterai"),
 		}
 	}
 }
