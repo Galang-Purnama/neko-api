@@ -54,6 +54,15 @@ class NekoAPI {
 			yts: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/yts"),
 			komikcast: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/komikcast"),
 			characterai: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/characterai"),
+			linkgroupwa: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/linkgroupwa"),
+			ringtone: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/ringtone"),
+			wikimedia: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/wikimedia"),
+			google: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/google"),
+			wallpaper: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/wallpaper"),
+			sticker: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/sticker"),
+			sfilemobi: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/sfilemobi"),
+			pinterest: async (text) => new API(this.baseURL, {text: text}, this.ApiKEY).get("/api/search/pinterest"),
+			couplepp: async () => new API(this.baseURL, this.ApiKEY).get("/api/search/couplepp"),
 		}
 	}
 }
