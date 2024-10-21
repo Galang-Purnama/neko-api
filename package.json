@@ -1,0 +1,28 @@
+{
+  "name": "@nekohimebot/neko-api",
+  "version": "1.0.0",
+  "description": "Nekohime API",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nekohime-api",
+    "scraper",
+    "botwhatsapp",
+    "api",
+    "api-wraper",
+    "rest-api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Galang-Purnama/nekohime-api.git"
+  },
+  "author": "Galang Purnama",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "form-data": "^4.0.0"
+  },
+  "homepage": "https://nkhm.xyz"
+}
