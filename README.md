@@ -8,21 +8,17 @@ And you can upgrade your apikey to premium or VIP, you can see more details at h
 ## Installation
 npm:
 ```bash
-$ npm install neko-api
-```
-yarn:
-```bash
-$ yarn add neko-api
+$ npm install @nekohimebot/neko-api
 ```
 
 ## Simple to Use
 ## CommonJs (CJS) syntax
 ```js
-const NekoAPI = require('neko-api');
+const NekoAPI = require('@nekohimebot/neko-api');
 ```
 ## ECMAScript Modules (ESM) syntax
 ```ts
-import NekoAPI from 'neko-api';
+import NekoAPI from '@nekohimebot/neko-api';
 ```
 ## Example
 ```js

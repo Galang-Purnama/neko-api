@@ -65,6 +65,11 @@ class NekoAPI {
 			couplepp: async () => new API(this.baseURL, this.ApiKEY).get("/api/search/couplepp"),
 		}
 	}
+	get maker() {
+		return {
+		circle: async (url) => new API(this.baseURL, {url: url}, this.ApiKEY).get("/api/maker/circle"),
+		}
+	}
 }
 
 module.exports = NekoAPI;
