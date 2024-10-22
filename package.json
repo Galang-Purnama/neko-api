@@ -1,6 +1,6 @@
 {
   "name": "@nekohimebot/neko-api",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Nekohime API",
   "main": "./src/index.js",
   "scripts": {
