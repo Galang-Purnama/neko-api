@@ -1,12 +1,5 @@
 const { API } = require("./api");
 
-class NekoResponse {
-  constructor(response) {
-    this.data = response.data;
-    this.status = response.status;
-  }
-}
-
 class NekoAPI {
   constructor(apikey) {
     this.ApiKEY = apikey || '';
@@ -20,7 +13,7 @@ class NekoAPI {
     } else if (method.toLowerCase() === 'post') {
       response = await new API(this.baseURL).post(endpoint, params, this.ApiKEY);
     }
-    return new NekoResponse(response);
+    return response
   }
 
   get islami() {
