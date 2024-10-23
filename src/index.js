@@ -1,89 +1,118 @@
 const { API } = require("./api");
 
+class NekoResponse {
+  constructor(response) {
+    this.data = response.data;
+    this.status = response.status;
+  }
+}
+
 class NekoAPI {
   constructor(apikey) {
-    this.ApiKEY = apikey ? apikey : ''
-    this.baseURL = "https://nkhm.xyz"
+    this.ApiKEY = apikey || '';
+    this.baseURL = "https://nkhm.xyz";
   }
-  
+
+  async request(endpoint, params = {}, method = 'GET') {
+    let response;
+    if (method.toLowerCase() === 'get') {
+      response = await new API(this.baseURL).get(endpoint, params, this.ApiKEY);
+    } else if (method.toLowerCase() === 'post') {
+      response = await new API(this.baseURL).post(endpoint, params, this.ApiKEY);
+    }
+    return new NekoResponse(response);
+  }
+
   get islami() {
     return {
-      jadwal_sholat: async (kota) => new API(this.baseURL).get("/api/islami/jadwalsholat", { kota: kota }, this.ApiKEY),
+      jadwal_sholat: (kota) => this.request("/api/islami/jadwalsholat", { kota }),
     };
   }
-  
+
   get downloader() {
     return {
-      tiktok: async (url) => new API(this.baseURL).get("/api/downloader/tiktok", { url: url }, this.ApiKEY),
-      instagram: async (url) => new API(this.baseURL).get("/api/downloader/igdownloader", { url: url }, this.ApiKEY),
-      fbdown: async (url) => new API(this.baseURL).get("/api/downloader/fbdown", { url: url }, this.ApiKEY),
-      gdrive: async (url) => new API(this.baseURL).get("/api/downloader/gdrive", { url: url }, this.ApiKEY),
-      dood: async (url) => new API(this.baseURL).get("/api/downloader/dood", { url: url }, this.ApiKEY),
-      terabox: async (url) => new API(this.baseURL).get("/api/downloader/terabox", { url: url }, this.ApiKEY),
-      twitter: async (url) => new API(this.baseURL).get("/api/downloader/twitter", { url: url }, this.ApiKEY),
-      tiktokv2: async (url) => new API(this.baseURL).get("/api/downloader/tiktokv2", { url: url }, this.ApiKEY),
-      tiktokv3: async (url) => new API(this.baseURL).get("/api/downloader/tiktokv3", { url: url }, this.ApiKEY),
-      capcut: async (url) => new API(this.baseURL).get("/api/downloader/capcut", { url: url }, this.ApiKEY),
-      igdlv2: async (url) => new API(this.baseURL).get("/api/downloader/igdlv2", { url: url }, this.ApiKEY),
-      igv3: async (url) => new API(this.baseURL).get("/api/downloader/igv3", { url: url }, this.ApiKEY),
-      yt: async (url) => new API(this.baseURL).get("/api/downloader/yt", { url: url }, this.ApiKEY),
-      ytv2: async (url) => new API(this.baseURL).get("/api/downloader/yt-v2", { url: url }, this.ApiKEY),
-      ytv3: async (url) => new API(this.baseURL).get("/api/downloader/yt-v3", { url: url }, this.ApiKEY),
-      soundcloud: async (url) => new API(this.baseURL).get("/api/downloader/soundcloud", { url: url }, this.ApiKEY),
-      spotify: async (url) => new API(this.baseURL).get("/api/downloader/spotify", { url: url }, this.ApiKEY),
-      mediafire: async (url) => new API(this.baseURL).get("/api/downloader/mediafire", { url: url }, this.ApiKEY),
-      sfilemobi: async (url) => new API(this.baseURL).get("/api/downloader/sfilemobi", { url: url }, this.ApiKEY),
-      xnxx: async (url) => new API(this.baseURL).get("/api/downloader/xnxx", { url: url }, this.ApiKEY),
-      pornhub: async (url) => new API(this.baseURL).get("/api/downloader/pornhub", { url: url }, this.ApiKEY),
-      nekopoi: async (url) => new API(this.baseURL).get("/api/downloader/nekopoi", { url: url }, this.ApiKEY),
-      doujindesu: async (url) => new API(this.baseURL).get("/api/downloader/doujindesu", { url: url }, this.ApiKEY),
-      komikcast: async (url) => new API(this.baseURL).get("/api/downloader/komikcast", { url: url }, this.ApiKEY),
-      nhentai: async (id) => new API(this.baseURL).get("/api/downloader/nhentai", { id: id }, this.ApiKEY),
-      nhentaiv2: async (id) => new API(this.baseURL).get("/api/downloader/nhentaiv2", { id: id }, this.ApiKEY),
-      pixiv: async (id) => new API(this.baseURL).get("/api/downloader/pixiv", { id: id }, this.ApiKEY),
-      telesticker: async (id) => new API(this.baseURL).get("/api/downloader/telesticker", { id: id }, this.ApiKEY),
-    }
+      tiktok: (url) => this.request("/api/downloader/tiktok", { url }),
+      instagram: (url) => this.request("/api/downloader/igdownloader", { url }),
+      fbdown: (url) => this.request("/api/downloader/fbdown", { url }),
+      gdrive: (url) => this.request("/api/downloader/gdrive", { url }),
+      dood: (url) => this.request("/api/downloader/dood", { url }),
+      terabox: (url) => this.request("/api/downloader/terabox", { url }),
+      twitter: (url) => this.request("/api/downloader/twitter", { url }),
+      tiktokv2: (url) => this.request("/api/downloader/tiktokv2", { url }),
+      tiktokv3: (url) => this.request("/api/downloader/tiktokv3", { url }),
+      capcut: (url) => this.request("/api/downloader/capcut", { url }),
+      igdlv2: (url) => this.request("/api/downloader/igdlv2", { url }),
+      igv3: (url) => this.request("/api/downloader/igv3", { url }),
+      yt: (url) => this.request("/api/downloader/yt", { url }),
+      ytv2: (url) => this.request("/api/downloader/yt-v2", { url }),
+      ytv3: (url) => this.request("/api/downloader/yt-v3", { url }),
+      soundcloud: (url) => this.request("/api/downloader/soundcloud", { url }),
+      spotify: (url) => this.request("/api/downloader/spotify", { url }),
+      mediafire: (url) => this.request("/api/downloader/mediafire", { url }),
+      sfilemobi: (url) => this.request("/api/downloader/sfilemobi", { url }),
+      xnxx: (url) => this.request("/api/downloader/xnxx", { url }),
+      pornhub: (url) => this.request("/api/downloader/pornhub", { url }),
+      nekopoi: (url) => this.request("/api/downloader/nekopoi", { url }),
+      doujindesu: (url) => this.request("/api/downloader/doujindesu", { url }),
+      komikcast: (url) => this.request("/api/downloader/komikcast", { url }),
+      nhentai: (id) => this.request("/api/downloader/nhentai", { id }),
+      nhentaiv2: (id) => this.request("/api/downloader/nhentaiv2", { id }),
+      pixiv: (id) => this.request("/api/downloader/pixiv", { id }),
+      telesticker: (id) => this.request("/api/downloader/telesticker", { id }),
+    };
   }
-  
+
   get fun() {
     return {
-      dadu: async () => new API(this.baseURL).get("/api/fun/dadu", {}, this.ApiKEY),
-      coffee: async () => new API(this.baseURL).get("/api/fun/coffee", {}, this.ApiKEY),
-      quotesanime: async () => new API(this.baseURL).get("/api/fun/quotesanime", {}, this.ApiKEY),
-    }
+      dadu: () => this.request("/api/fun/dadu"),
+      coffee: () => this.request("/api/fun/coffee"),
+      quotesanime: () => this.request("/api/fun/quotesanime"),
+    };
   }
-  
+
   get search() {
     return {
-      yts: async (text) => new API(this.baseURL).get("/api/search/yts", { text: text }, this.ApiKEY),
-      komikcast: async (text) => new API(this.baseURL).get("/api/search/komikcast", { text: text }, this.ApiKEY),
-      characterai: async (text) => new API(this.baseURL).get("/api/search/characterai", { text: text }, this.ApiKEY),
-      linkgroupwa: async (text) => new API(this.baseURL).get("/api/search/linkgroupwa", { text: text }, this.ApiKEY),
-      ringtone: async (text) => new API(this.baseURL).get("/api/search/ringtone", { text: text }, this.ApiKEY),
-      wikimedia: async (text) => new API(this.baseURL).get("/api/search/wikimedia", { text: text }, this.ApiKEY),
-      google: async (text) => new API(this.baseURL).get("/api/search/google", { text: text }, this.ApiKEY),
-      wallpaper: async (text) => new API(this.baseURL).get("/api/search/wallpaper", { text: text }, this.ApiKEY),
-      sticker: async (text) => new API(this.baseURL).get("/api/search/sticker", { text: text }, this.ApiKEY),
-      sfilemobi: async (text) => new API(this.baseURL).get("/api/search/sfilemobi", { text: text }, this.ApiKEY),
-      pinterest: async (text) => new API(this.baseURL).get("/api/search/pinterest", { text: text }, this.ApiKEY),
-      couplepp: async () => new API(this.baseURL).get("/api/search/couplepp", {}, this.ApiKEY),
-    }
+      yts: (text) => this.request("/api/search/yts", { text }),
+      komikcast: (text) => this.request("/api/search/komikcast", { text }),
+      characterai: (text) => this.request("/api/search/characterai", { text }),
+      linkgroupwa: (text) => this.request("/api/search/linkgroupwa", { text }),
+      ringtone: (text) => this.request("/api/search/ringtone", { text }),
+      wikimedia: (text) => this.request("/api/search/wikimedia", { text }),
+      google: (text) => this.request("/api/search/google", { text }),
+      wallpaper: (text) => this.request("/api/search/wallpaper", { text }),
+      sticker: (text) => this.request("/api/search/sticker", { text }),
+      sfilemobi: (text) => this.request("/api/search/sfilemobi", { text }),
+      pinterest: (text) => this.request("/api/search/pinterest", { text }),
+      couplepp: () => this.request("/api/search/couplepp"),
+    };
   }
-  
+
   get maker() {
     return {
-      circle: async (url) => new API(this.baseURL).get("/api/maker/circle", { url: url }, this.ApiKEY),
-      beautiful: async (url) => new API(this.baseURL).get("/api/maker/beautiful", { url: url }, this.ApiKEY),
-      blur: async (url) => new API(this.baseURL).get("/api/maker/blur", { url: url }, this.ApiKEY),
-      darkness: async (url) => new API(this.baseURL).get("/api/maker/darkness", { url: url }, this.ApiKEY),
-      facepalm: async (url) => new API(this.baseURL).get("/api/maker/facepalm", { url: url }, this.ApiKEY),
-      invert: async (url) => new API(this.baseURL).get("/api/maker/invert", { url: url }, this.ApiKEY),
-      pixelate: async (url) => new API(this.baseURL).get("/api/maker/pixelate", { url: url }, this.ApiKEY),
-      rainbow: async (url) => new API(this.baseURL).get("/api/maker/rainbow", { url: url }, this.ApiKEY),
-      resize: async (url) => new API(this.baseURL).get("/api/maker/resize", { url: url }, this.ApiKEY),
-      trigger: async (url) => new API(this.baseURL).get("/api/maker/trigger", { url: url }, this.ApiKEY),
-      wanted: async (url) => new API(this.baseURL).get("/api/maker/wanted", { url: url }, this.ApiKEY),
-    }
+      circle: (url) => this.request("/api/maker/circle", { url }),
+      beautiful: (url) => this.request("/api/maker/beautiful", { url }),
+      blur: (url) => this.request("/api/maker/blur", { url }),
+      darkness: (url) => this.request("/api/maker/darkness", { url }),
+      facepalm: (url) => this.request("/api/maker/facepalm", { url }),
+      invert: (url) => this.request("/api/maker/invert", { url }),
+      pixelate: (url) => this.request("/api/maker/pixelate", { url }),
+      rainbow: (url) => this.request("/api/maker/rainbow", { url }),
+      resize: (url) => this.request("/api/maker/resize", { url }),
+      trigger: (url) => this.request("/api/maker/trigger", { url }),
+      wanted: (url) => this.request("/api/maker/wanted", { url }),
+      attp: (text) => this.request("/api/maker/attp", { text }),
+      ttp: (text) => this.request("/api/maker/ttp", { text }),
+      emojimix: (emoji1, emoji2) => this.request("/api/maker/emojimix", { emoji1,  emoji2 }),
+      welcome1: (name, gpname, member, pp, bg) => this.request("/api/maker/welcome1", { name, gpname, member, pp, bg }),
+      goodbye1: (name, gpname, member, pp, bg) => this.request("/api/maker/goodbye1", { name, gpname, member, pp, bg }),
+    };
+  }
+
+  get ai() {
+    return {
+      nekogpt: (message, id, username, custom) => this.request("/api/chat", { message, id, username, custom }, 'POST'),
+      toanime: (url) => this.request("/api/ai/toanime", { url }),
+    };
   }
 }
 
