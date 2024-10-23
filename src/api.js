@@ -24,16 +24,21 @@ class API {
                 })
               )
             : "",
-        responseType: 'arraybuffer', // Menangani respon dalam bentuk binary
         ...options,
+        responseType: 'arraybuffer',
       });
-  
-      return res.data;
-    } catch {
+      try {
+        const jsonData = JSON.parse(res.data.toString('utf-8'));
+        return jsonData;
+      } catch {
+        return Buffer.from(res.data);
+      }
+    } catch (error) {
+      console.error(error);
       return { status: 400 };
     }
   }
-  
+
   async post(path = "", data = {}, apikey, options = {}) {
     try {
       if (!!data) {
@@ -42,24 +47,28 @@ class API {
           let valueKey = data[key];
           form.append(key, valueKey);
         }
-  
+
         const res = await this.create.post(
           path +
             new URLSearchParams(
               Object.entries({ ...(apikey ? { apikey: apikey } : {}) })
             ),
           form,
-          { responseType: 'arraybuffer', ...options } // Menangani respon dalam bentuk binary
+          { ...options, responseType: 'arraybuffer' }
         );
-  
-        return res.data;
+        try {
+          const jsonData = JSON.parse(res.data.toString('utf-8'));
+          return jsonData;
+        } catch {
+          return Buffer.from(res.data);
+        }
       } else {
         return { status: 400 };
       }
-    } catch {
+    } catch (error) {
       return { status: 400 };
     }
-  }  
+  }
 }
 
 module.exports = { API };
