@@ -24,34 +24,34 @@ class API {
                 })
               )
             : "",
+        responseType: 'arraybuffer', // Menangani respon dalam bentuk binary
         ...options,
       });
-
+  
       return res.data;
     } catch {
       return { status: 400 };
     }
   }
-
+  
   async post(path = "", data = {}, apikey, options = {}) {
     try {
       if (!!data) {
         const form = new FormData();
-
         for (let key in data) {
           let valueKey = data[key];
           form.append(key, valueKey);
         }
-
+  
         const res = await this.create.post(
           path +
             new URLSearchParams(
               Object.entries({ ...(apikey ? { apikey: apikey } : {}) })
             ),
           form,
-          { ...options }
+          { responseType: 'arraybuffer', ...options } // Menangani respon dalam bentuk binary
         );
-
+  
         return res.data;
       } else {
         return { status: 400 };
@@ -59,7 +59,7 @@ class API {
     } catch {
       return { status: 400 };
     }
-  }
+  }  
 }
 
 module.exports = { API };
