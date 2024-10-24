@@ -80,6 +80,32 @@ class NekoAPI {
     };
   }
 
+  get information() {
+    return {
+      githubstalk: (text) => this.request("/api/info/githubstalk", { text }),
+      komikcast: (url) => this.request("/api/info/komikcast", { url }),
+      characterai: (id) => this.request("/api/info/characterai", { id }),
+      translate: (lang, text) => this.request("/api/info/translate", { lang, text }),
+      emoji: (emoji) => this.request("/api/info/emoji", { emoji }),
+      gempa: () => this.request("/api/info/gempa"),
+      key: () => this.request("/info/key"),
+    }
+  }
+
+  get tools() {
+    return {
+      npmstalk: (text) => this.request("/api/tools/npmstalk", { text }),
+      ouobypass: (url) => this.request("/api/tools/ouobypass", { url }),
+      ebase64: (text) => this.request("/api/tools/ebase64", { text }),
+      debase64: (text) => this.request("/api/tools/debase64", { text }),
+      ebinary: (text) => this.request("/api/tools/ebinary", { text }),
+      debinary: (text) => this.request("/api/tools/debinary", { text }),
+      styletext: (text) => this.request("/api/tools/styletext", { text }),
+      ssweb: (link) => this.request("/api/tools/ssweb", { link }),
+      fakeua: () => this.request("/api/tools/fakeua"),
+    }
+  }
+
   get maker() {
     return {
       circle: (url) => this.request("/api/maker/circle", { url }),
@@ -105,6 +131,28 @@ class NekoAPI {
     return {
       nekogpt: (message, id, username, custom) => this.request("/api/chat", { message, id, username, custom }, 'POST'),
       toanime: (url) => this.request("/api/ai/toanime", { url }),
+      bingimg: (text) => this.request("/api/ai/bingimg", { text }),
+      bingchat: (text) => this.request("/api/ai/bingchat", { text }),
+      characterai: (text, id) => this.request("/api/ai/characterai", { text, id }),
+      diffusion: (text, id) => this.request("/api/ai/diffusion", { text, id }),
+      hd: (url) => this.request("/api/ai/hd", { url }),
+      remini: (url) => this.request("/api/ai/remini", { url }),
+     /**
+     * Mengambil hasil dari model AI berdasarkan URL yang diberikan.
+     * Model yang digunakan dapat berupa salah satu dari berikut:
+     * 
+     * toonyou, timelessv10, theallys, shoninsbeautiful, pruned, sdv14, rundiffusionfxv10, rundiffusionfx25dv10, revanimatedv122, 
+     * redshiftdiffusionv10, realisticvisionv50, realisticvisionv40, realisticvisionv20, realisticvisionv14, protogenx34, portraitplus, 
+     * mixstylizedanime, openjourney, neverendingdream, meiname, meinameina, mechamix, majicmixrealisticv4, lyrielv16, lofiv4, juggernaut, 
+     * photography, naturals, elldreths-vivid-mix, eimisanimev1, edgeofrealism, dreamshaperv8, dreamshaperv7, dreamshaper, photorealv2, 
+     * diffusionv1, animev1, deliberatev3, deliberatev2, dalcefo, cyberrealistic, cuteyukimixadorable, counterfeit, childrensstories, 
+     * cetusmix, blazing, aom3a3, anythingv5, anythingv4, anythingv3, analog-diffusion, amireal, absolutereality, 3guofeng3
+     */
+    anything: (text, model) => this.request("/api/ai/anything", { text, model}),
+    gemini: (text) => this.request("/api/ai/gemini", { text }),
+    geminiocr: (url, text) => this.request("/api/ai/gemini-img", { url, text }),
+    ardi: (text) => this.request("/api/ai/tts-ardi", { text }),
+    gadis: (text) => this.request("/api/ai/tts-gadis", { text }),
     };
   }
 }
