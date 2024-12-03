@@ -15,58 +15,47 @@ class API {
   async get(path = "/", query = {}, apikey, options = {}) {
     try {
       const res = await this.create.get(path, {
-        params:
-          query || apikey
-            ? new URLSearchParams(
-                Object.entries({
-                  ...query,
-                  ...(apikey ? { apikey: apikey } : {}),
-                })
-              )
-            : "",
+        params: {
+          ...query,
+          ...(apikey ? { apikey: apikey } : {}),
+        },
         ...options,
-        responseType: 'arraybuffer',
       });
-      try {
-        const jsonData = JSON.parse(res.data.toString('utf-8'));
-        return jsonData;
-      } catch {
-        return Buffer.from(res.data);
-      }
+
+      return res.data;
     } catch (error) {
-      console.error(error);
-      return { status: 400 };
+      console.error("GET Request Error:", error.message);
+      return { status: 400, error: error.message };
     }
   }
 
   async post(path = "", data = {}, apikey, options = {}) {
     try {
-      if (!!data) {
-        const form = new FormData();
-        for (let key in data) {
-          let valueKey = data[key];
-          form.append(key, valueKey);
+      let payload;
+      let headers = options.headers || {};
+      if (typeof data === "object" && !(data instanceof Buffer)) {
+        if (apikey) {
+          data.apikey = apikey;
         }
-
-        const res = await this.create.post(
-          path +
-            new URLSearchParams(
-              Object.entries({ ...(apikey ? { apikey: apikey } : {}) })
-            ),
-          form,
-          { ...options, responseType: 'arraybuffer' }
-        );
-        try {
-          const jsonData = JSON.parse(res.data.toString('utf-8'));
-          return jsonData;
-        } catch {
-          return Buffer.from(res.data);
+        if (data instanceof FormData) {
+          payload = data;
+          headers = { ...headers, ...data.getHeaders() };
+        } else {
+          payload = JSON.stringify(data);
+          headers["Content-Type"] = "application/json";
         }
       } else {
-        return { status: 400 };
+        payload = data;
       }
+      const res = await this.create.post(path, payload, {
+        ...options,
+        headers,
+      });
+
+      return res.data;
     } catch (error) {
-      return { status: 400 };
+      console.error("POST Request Error:", error.message);
+      return { status: 400, error: error.message };
     }
   }
 }

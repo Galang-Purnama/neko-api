@@ -80,38 +80,13 @@ class NekoAPI {
     };
   }
 
-  get information() {
-    return {
-      githubstalk: (text) => this.request("/api/info/githubstalk", { text }),
-      komikcast: (url) => this.request("/api/info/komikcast", { url }),
-      characterai: (id) => this.request("/api/info/characterai", { id }),
-      translate: (lang, text) => this.request("/api/info/translate", { lang, text }),
-      emoji: (emoji) => this.request("/api/info/emoji", { emoji }),
-      gempa: () => this.request("/api/info/gempa"),
-      key: () => this.request("/info/key"),
-    }
-  }
-
-  get tools() {
-    return {
-      npmstalk: (text) => this.request("/api/tools/npmstalk", { text }),
-      ouobypass: (url) => this.request("/api/tools/ouobypass", { url }),
-      ebase64: (text) => this.request("/api/tools/ebase64", { text }),
-      debase64: (text) => this.request("/api/tools/debase64", { text }),
-      ebinary: (text) => this.request("/api/tools/ebinary", { text }),
-      debinary: (text) => this.request("/api/tools/debinary", { text }),
-      styletext: (text) => this.request("/api/tools/styletext", { text }),
-      ssweb: (link) => this.request("/api/tools/ssweb", { link }),
-      fakeua: () => this.request("/api/tools/fakeua"),
-    }
-  }
-
   get maker() {
     return {
       circle: (url) => this.request("/api/maker/circle", { url }),
       beautiful: (url) => this.request("/api/maker/beautiful", { url }),
       blur: (url) => this.request("/api/maker/blur", { url }),
       darkness: (url) => this.request("/api/maker/darkness", { url }),
+      qc: (json) => this.request("/api/maker/qc", json, 'POST'),
       facepalm: (url) => this.request("/api/maker/facepalm", { url }),
       invert: (url) => this.request("/api/maker/invert", { url }),
       pixelate: (url) => this.request("/api/maker/pixelate", { url }),
@@ -149,10 +124,6 @@ class NekoAPI {
      * cetusmix, blazing, aom3a3, anythingv5, anythingv4, anythingv3, analog-diffusion, amireal, absolutereality, 3guofeng3
      */
     anything: (text, model) => this.request("/api/ai/anything", { text, model}),
-    gemini: (text) => this.request("/api/ai/gemini", { text }),
-    geminiocr: (url, text) => this.request("/api/ai/gemini-img", { url, text }),
-    ardi: (text) => this.request("/api/ai/tts-ardi", { text }),
-    gadis: (text) => this.request("/api/ai/tts-gadis", { text }),
     };
   }
 }
