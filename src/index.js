@@ -6,14 +6,14 @@ class NekoAPI {
     this.baseURL = "https://nkhm.xyz";
   }
 
-  async request(endpoint, params = {}, method = 'GET') {
+  async request(endpoint, params = {}, method = 'GET', options = {}) {
     let response;
     if (method.toLowerCase() === 'get') {
-      response = await new API(this.baseURL).get(endpoint, params, this.ApiKEY);
+      response = await new API(this.baseURL).get(endpoint, params, this.ApiKEY, options); // Remove the unnecessary assignment
     } else if (method.toLowerCase() === 'post') {
-      response = await new API(this.baseURL).post(endpoint, params, this.ApiKEY);
+      response = await new API(this.baseURL).post(endpoint, params, this.ApiKEY, options); // Remove the unnecessary assignment
     }
-    return response
+    return response;
   }
 
   get islami() {
@@ -65,7 +65,7 @@ class NekoAPI {
 
   get search() {
     return {
-      yts: (text) => this.request("/api/search/yts", { text }),
+      yts: (text) => this.request("/api/search/ytplay", { text }),
       komikcast: (text) => this.request("/api/search/komikcast", { text }),
       characterai: (text) => this.request("/api/search/characterai", { text }),
       linkgroupwa: (text) => this.request("/api/search/linkgroupwa", { text }),
@@ -96,7 +96,7 @@ class NekoAPI {
       wanted: (url) => this.request("/api/maker/wanted", { url }),
       attp: (text) => this.request("/api/maker/attp", { text }),
       ttp: (text) => this.request("/api/maker/ttp", { text }),
-      emojimix: (emoji1, emoji2) => this.request("/api/maker/emojimix", { emoji1,  emoji2 }),
+      emojimix: (emoji1, emoji2) => this.request("/api/maker/emojimix", { emoji1, emoji2 }),
       welcome1: (name, gpname, member, pp, bg) => this.request("/api/maker/welcome1", { name, gpname, member, pp, bg }),
       goodbye1: (name, gpname, member, pp, bg) => this.request("/api/maker/goodbye1", { name, gpname, member, pp, bg }),
     };
@@ -105,14 +105,14 @@ class NekoAPI {
   get ai() {
     return {
       nekogpt: (message, id, username, custom) => this.request("/api/chat", { message, id, username, custom }, 'POST'),
-      toanime: (url) => this.request("/api/ai/toanime", { url }),
+      toanime: (url) => this.request("/api/ai/toanime", { url }, 'GET', { responseType: 'arraybuffer' }),
       bingimg: (text) => this.request("/api/ai/bingimg", { text }),
       bingchat: (text) => this.request("/api/ai/bingchat", { text }),
       characterai: (text, id) => this.request("/api/ai/characterai", { text, id }),
       diffusion: (text, id) => this.request("/api/ai/diffusion", { text, id }),
       hd: (url) => this.request("/api/ai/hd", { url }),
       remini: (url) => this.request("/api/ai/remini", { url }),
-     /**
+      /**
      * Mengambil hasil dari model AI berdasarkan URL yang diberikan.
      * Model yang digunakan dapat berupa salah satu dari berikut:
      * 
@@ -123,7 +123,7 @@ class NekoAPI {
      * diffusionv1, animev1, deliberatev3, deliberatev2, dalcefo, cyberrealistic, cuteyukimixadorable, counterfeit, childrensstories, 
      * cetusmix, blazing, aom3a3, anythingv5, anythingv4, anythingv3, analog-diffusion, amireal, absolutereality, 3guofeng3
      */
-    anything: (text, model) => this.request("/api/ai/anything", { text, model}),
+      anything: (text, model) => this.request("/api/ai/anything", { text, model }),
     };
   }
 }
