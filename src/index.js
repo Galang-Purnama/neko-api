@@ -57,8 +57,8 @@ class NekoAPI {
 
   get fun() {
     return {
-      dadu: () => this.request("/api/fun/dadu"),
-      coffee: () => this.request("/api/fun/coffee"),
+      dadu: () => this.request("/api/fun/dadu", "GET", { responseType: 'arraybuffer' }),
+      coffee: () => this.request("/api/fun/coffee", "GET", { responseType: 'arraybuffer' }),
       quotesanime: () => this.request("/api/fun/quotesanime"),
     };
   }
@@ -82,23 +82,23 @@ class NekoAPI {
 
   get maker() {
     return {
-      circle: (url) => this.request("/api/maker/circle", { url }),
-      beautiful: (url) => this.request("/api/maker/beautiful", { url }),
-      blur: (url) => this.request("/api/maker/blur", { url }),
-      darkness: (url) => this.request("/api/maker/darkness", { url }),
-      qc: (json) => this.request("/api/maker/qc", json, 'POST'),
-      facepalm: (url) => this.request("/api/maker/facepalm", { url }),
-      invert: (url) => this.request("/api/maker/invert", { url }),
-      pixelate: (url) => this.request("/api/maker/pixelate", { url }),
-      rainbow: (url) => this.request("/api/maker/rainbow", { url }),
-      resize: (url) => this.request("/api/maker/resize", { url }),
-      trigger: (url) => this.request("/api/maker/trigger", { url }),
-      wanted: (url) => this.request("/api/maker/wanted", { url }),
-      attp: (text) => this.request("/api/maker/attp", { text }),
-      ttp: (text) => this.request("/api/maker/ttp", { text }),
-      emojimix: (emoji1, emoji2) => this.request("/api/maker/emojimix", { emoji1, emoji2 }),
-      welcome1: (name, gpname, member, pp, bg) => this.request("/api/maker/welcome1", { name, gpname, member, pp, bg }),
-      goodbye1: (name, gpname, member, pp, bg) => this.request("/api/maker/goodbye1", { name, gpname, member, pp, bg }),
+      circle: (url) => this.request("/api/maker/circle", { url }, 'GET', { responseType: 'arraybuffer' }),
+      beautiful: (url) => this.request("/api/maker/beautiful", { url }, 'GET', { responseType: 'arraybuffer' }),
+      blur: (url) => this.request("/api/maker/blur", { url }, 'GET', { responseType: 'arraybuffer' }),
+      darkness: (url) => this.request("/api/maker/darkness", { url }, 'GET', { responseType: 'arraybuffer' }),
+      qc: (json) => this.request("/api/maker/qc", json, 'POST', { responseType: 'arraybuffer' }),
+      facepalm: (url) => this.request("/api/maker/facepalm", { url }, 'GET', { responseType: 'arraybuffer' }),
+      invert: (url) => this.request("/api/maker/invert", { url }, 'GET', { responseType: 'arraybuffer' }),
+      pixelate: (url) => this.request("/api/maker/pixelate", { url }, 'GET', { responseType: 'arraybuffer' }),
+      rainbow: (url) => this.request("/api/maker/rainbow", { url }, 'GET', { responseType: 'arraybuffer' }),
+      resize: (url) => this.request("/api/maker/resize", { url }, 'GET', { responseType: 'arraybuffer' }),
+      trigger: (url) => this.request("/api/maker/trigger", { url }, 'GET', { responseType: 'arraybuffer' }),
+      wanted: (url) => this.request("/api/maker/wanted", { url }, 'GET', { responseType: 'arraybuffer' }),
+      attp: (text) => this.request("/api/maker/attp", { text }, 'GET', { responseType: 'arraybuffer' }),
+      ttp: (text) => this.request("/api/maker/ttp", { text }, 'GET', { responseType: 'arraybuffer' }),
+      emojimix: (emoji1, emoji2) => this.request("/api/maker/emojimix", { emoji1, emoji2 }, 'GET', { responseType: 'arraybuffer' }),
+      welcome1: (name, gpname, member, pp, bg) => this.request("/api/maker/welcome1", { name, gpname, member, pp, bg }, 'GET', { responseType: 'arraybuffer' }),
+      goodbye1: (name, gpname, member, pp, bg) => this.request("/api/maker/goodbye1", { name, gpname, member, pp, bg }, 'GET', { responseType: 'arraybuffer' }),
     };
   }
 
@@ -109,9 +109,9 @@ class NekoAPI {
       bingimg: (text) => this.request("/api/ai/bingimg", { text }),
       bingchat: (text) => this.request("/api/ai/bingchat", { text }),
       characterai: (text, id) => this.request("/api/ai/characterai", { text, id }),
-      diffusion: (text, id) => this.request("/api/ai/diffusion", { text, id }),
-      hd: (url) => this.request("/api/ai/hd", { url }),
-      remini: (url) => this.request("/api/ai/remini", { url }),
+      diffusion: (text, id) => this.request("/api/ai/diffusion", { text, id }, 'GET', { responseType: 'arraybuffer' }),
+      hd: (url) => this.request("/api/ai/hd", { url }, 'GET', { responseType: 'arraybuffer' }),
+      remini: (url) => this.request("/api/ai/remini", { url }, 'GET', { responseType: 'arraybuffer' }),
       /**
      * Mengambil hasil dari model AI berdasarkan URL yang diberikan.
      * Model yang digunakan dapat berupa salah satu dari berikut:
@@ -123,7 +123,7 @@ class NekoAPI {
      * diffusionv1, animev1, deliberatev3, deliberatev2, dalcefo, cyberrealistic, cuteyukimixadorable, counterfeit, childrensstories, 
      * cetusmix, blazing, aom3a3, anythingv5, anythingv4, anythingv3, analog-diffusion, amireal, absolutereality, 3guofeng3
      */
-      anything: (text, model) => this.request("/api/ai/anything", { text, model }),
+      anything: (text, model) => this.request("/api/ai/anything", { text, model }, 'GET', { responseType: 'arraybuffer' }),
     };
   }
 }
