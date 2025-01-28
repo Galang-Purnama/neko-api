@@ -86,7 +86,7 @@ class NekoAPI {
       beautiful: (url) => this.request("/api/maker/beautiful", { url }, 'GET', { responseType: 'arraybuffer' }),
       blur: (url) => this.request("/api/maker/blur", { url }, 'GET', { responseType: 'arraybuffer' }),
       darkness: (url) => this.request("/api/maker/darkness", { url }, 'GET', { responseType: 'arraybuffer' }),
-      qc: (json) => this.request("/api/maker/qc", json, 'POST', { responseType: 'arraybuffer' }),
+      qc: (json) => this.request("/api/maker/qc", json, 'POST'),
       facepalm: (url) => this.request("/api/maker/facepalm", { url }, 'GET', { responseType: 'arraybuffer' }),
       invert: (url) => this.request("/api/maker/invert", { url }, 'GET', { responseType: 'arraybuffer' }),
       pixelate: (url) => this.request("/api/maker/pixelate", { url }, 'GET', { responseType: 'arraybuffer' }),
